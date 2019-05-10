@@ -1,1 +1,1 @@
-Position 3Target is in the left side of the list and less than the target
+ Position 0: Target is in the left part and is less than the mid value

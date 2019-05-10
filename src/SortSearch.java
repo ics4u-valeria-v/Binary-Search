@@ -258,7 +258,8 @@ public class SortSearch {
 		    		int max = rndNums.size() - 1;
 		    		boolean targetBool = false;
 		    		genCount = 0;
-		    		
+		    		int mid = (min+max)/2;
+		    		String pos = "";
 		    		//check if the target is in the list
 		    		for (int counter = 0; counter < rndNums.size(); counter ++)
 		    		{
@@ -282,7 +283,19 @@ public class SortSearch {
 		    		//if the target is in the list then call binary search method
 		    		if (targetBool == true)
 		    		{
-		    			BinarySearch (min, max, target);
+		    			if (target == rndNums.get(mid))
+		    			{
+		    				pos = "Target is the middle value";
+		    			}
+		    			else if (target < rndNums.get(mid))
+		    			{
+		    				pos = "Target is in the left part and is less than the mid value";
+		    			}
+		    			else
+		    			{
+		    				pos = "Target is in the right part and is greater than the mid  value";
+		    			}
+		    			BinarySearch (min, max, target, pos);
 		    		}
 		    		else if (targetBool == false)
 		    		{
@@ -348,8 +361,8 @@ public class SortSearch {
 	}
 	
     //Binary Search Function
-    public void BinarySearch(int min, int max, int target)
-    {
+    public void BinarySearch(int min, int max, int target, String pos)
+    {   displayS = " ";
     	System.out.print(genCount);
     	//find the middle
     	int mid = (min+max)/2;
@@ -359,15 +372,8 @@ public class SortSearch {
     	if (rndNums.get(mid) == target)
     	{
     		position = mid;
-    		displayS += "Position " + position;
-    		if (right == true)
-    		{
-    			displayS += "   Target is in the right side of the list and greater than the target";
-    		}
-    		else
-    		{
-    			displayS += "        Target is in the left side of the list and less than the target";
-    		}
+    		displayS += "Position " + position + ": " + pos;
+    		
     		
         	//display the list in a text file
     		File rndFile = new File("Files/BinarySearch.txt");
@@ -393,7 +399,7 @@ public class SortSearch {
     	else if (rndNums.get(mid)>target){
     		
     		max = mid -1;
-    		BinarySearch (min, max, target);
+    		BinarySearch (min, max, target, pos);
     		if (genCount == 0)
     		{
     			System.out.print("Here l");
@@ -405,7 +411,7 @@ public class SortSearch {
     	else if (rndNums.get(mid)<target){
     		
     		min = mid+1;
-    		BinarySearch (min, max, target);
+    		BinarySearch (min, max, target, pos);
     		if (genCount == 0)
     		{
     			System.out.print("Here r");
